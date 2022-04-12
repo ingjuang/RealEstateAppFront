@@ -1,0 +1,60 @@
+<nb-card>
+  <nb-card-body>
+    <form [formGroup]="ownerForm">
+      <div class="row">
+        <div class="col-lg-6">
+          <label>Nombre</label>
+          <input
+            type="text"
+            nbInput
+            fullWidth
+            shape="rectangle"
+            formControlName="name"
+          />
+          <label>Dirección</label>
+          <input
+            type="text"
+            nbInput
+            fullWidth
+            shape="rectangle"
+            formControlName="address"
+          />
+        </div>
+        <div class="col-lg-6">
+          <label>Cumpleaños</label>
+          <input
+            nbInput
+            fullWidth
+            [nbDatepicker]="formpicker"
+            formControlName="bithday"
+          />
+          <nb-datepicker #formpicker></nb-datepicker>
+
+          <label>Foto</label>
+          <br />
+          <input
+            type="file"
+            id="FUImage"
+            name="FUImage"
+            accept=".png, .jpg, .jpeg"
+            (change)="handleFileInput($event.target)"
+          />
+          <button nbButton status="primary" (click)="btnUpload()">
+            Subir imagen
+          </button>
+          <br />
+          <br />
+          <nb-alert *ngIf="showUploadMessage" status="danger"> No se olvide de hacer click en el botón 'subir imagen'!</nb-alert>
+          <div *ngIf="this.edit && !ImageBaseData">
+            <img src="{{ f.photo.value }}" alt="Owner image" width="200" />
+          </div>
+          <div class="card-container text-center" *ngIf="ImageBaseData">
+            <img src="{{ ImageBaseData }}" alt="Selected Image" width="200" />
+          </div>
+
+        </div>
+      </div>
+      <button nbButton (click)="onRegister()">Guardar</button>
+    </form>
+  </nb-card-body>
+</nb-card>

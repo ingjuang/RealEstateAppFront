@@ -1,0 +1,101 @@
+<div class="row">
+
+    <div class="col-lg-6">
+        <h4>Formulario Propiedad</h4>
+        <form  [formGroup]="propertyForm">
+            <nb-card>
+                <nb-card-body>
+                    <label>Nombre</label>
+                    <input
+                      type="text"
+                      nbInput
+                      fullWidth
+                      shape="rectangle"
+                      formControlName="name"
+                    />
+                    <br>
+                    <label>Dirección</label>
+                    <input
+                      type="text"
+                      nbInput
+                      fullWidth
+                      shape="rectangle"
+                      formControlName="address"
+                    />
+                    <br>
+                    <label>Precio</label>
+                    <input
+                      type="number"
+                      nbInput
+                      fullWidth
+                      shape="rectangle"
+                      formControlName="price"
+                    />
+                    <br>
+                    <label>Año</label>
+                    <input
+                      type="number"
+                      nbInput
+                      fullWidth
+                      shape="rectangle"
+                      formControlName="year"
+                    />
+                    <br>
+                    <label>Código interno</label>
+                    <input
+                      type="number"
+                      nbInput
+                      fullWidth
+                      shape="rectangle"
+                      formControlName="codeInternal"
+                    />
+                    <br>
+                    <label>Propietario</label>
+                    <nb-select formControlName="idOwner" fullWidth="true" placeholder="Selecciona el propietario">
+                        <nb-option *ngFor="let owner of owners" [value]="owner.idOwner">{{owner.name}}</nb-option>
+                    </nb-select>
+                    <br>
+                    <br>
+                    <button nbButton (click)="saveProperty()">Guardar propiedad</button>
+                    <nb-alert *ngIf="savedProperty" status="danger"> No se olvide de hacer click en el botón 'subir imagen'!</nb-alert>
+                </nb-card-body>
+            </nb-card>
+        </form>
+    </div>
+    <div class="col-lg-6">
+        <h4>Imágenes propiedades</h4>
+         <nb-card>
+             <nb-card-body>
+                <label>Foto</label>
+                <br />
+                <input
+                  type="file"
+                  id="FUImage"
+                  name="FUImage"
+                  accept=".png, .jpg, .jpeg"
+                  (change)="handleFileInput($event.target)"
+                />
+                <button nbButton status="primary" (click)="btnUpload()">
+                  Subir imagen
+                </button>
+                <nb-alert *ngIf="showUploadMessage" status="danger"> No se olvide de hacer click en el botón 'subir imagen'!</nb-alert>
+                <div class="card-container text-center" *ngIf="ImageBaseData">
+                  <img src="{{ ImageBaseData }}" alt="Selected Image" width="200" />
+                </div>
+
+
+                <div>
+                    <h6>Imágenes subidas</h6>
+                    <hr>
+                    <div *ngFor="let image of images">
+                        <img [src]="image.fileB64" alt="property image" width="200" />
+                        <button nbButton (click)="deleteFileB64(image)">Eliminar foto</button>
+                        <hr>
+                    </div>
+
+                </div>
+             </nb-card-body>
+         </nb-card>
+    </div>
+
+</div>

@@ -1,0 +1,38 @@
+<nb-card>
+    <nb-card-body>
+        <button nbButton status="primary" [routerLink]="['property-form']">Crear Propiedad</button>
+
+    </nb-card-body>
+
+    <nb-card-body>
+        <table>
+            <tr>
+                <th>Id propiedad</th>
+                <th>Nombre</th>
+                <th>Dirección</th>
+                <th>Precio</th>
+                <th>Código</th>
+                <th>Año</th>
+                <th>Dueño</th>
+                <th></th>
+            </tr>
+            <tr *ngFor="let property of properties">
+                <td>{{property.idProperty}}</td>
+                <td>{{property.name}}</td>
+                <td>{{property.address}}</td>
+                <td>{{property.price}}</td>
+                <td>{{property.codeInternal}}</td>
+                <td>{{property.year}}</td>
+                <td>
+                    <div *ngIf="owners.length > 0p">
+                        {{getOwner(property.idOwner)}}
+                    </div>
+                </td>
+                <td>
+                    <button nbButton (click)="editProperty(property.idProperty)" status="basic"><nb-icon icon="edit-2-outline"></nb-icon> Editar</button>
+                    <button nbButton (click)="deleteProperty(property.idProperty)" status="basic"><nb-icon icon="trash-2-outline"></nb-icon> Eliminar</button>
+                </td>
+            </tr>
+        </table>
+    </nb-card-body>
+</nb-card>
